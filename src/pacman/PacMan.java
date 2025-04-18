@@ -111,7 +111,7 @@ public class PacMan extends JPanel implements ActionListener, KeyListener
     private String[] tileMap = {
         "XXXXXXXXXXXXXXXXXXX",
         "X        X        X",
-        "X XX XXX X XXX XX X",
+        "X XX XXXXX XXX XX X",
         "X                 X",
         "X XX X XXXXX X XX X",
         "X    X       X    X",
@@ -255,15 +255,44 @@ public class PacMan extends JPanel implements ActionListener, KeyListener
             g.fillRect(food.x, food.y, food.width, food.height);
         }
         //score
-        g.setFont(new Font("Arial", Font.PLAIN, 18));
-        if (gameOver) 
-        {
-            g.drawString("Game Over: " + String.valueOf(score), tileSize/2, tileSize/2);
-        }
-        else
-        {
-            g.drawString("X" + String.valueOf(lives)+ " Score: " + String.valueOf(score) , tileSize/2, tileSize/2);
-        }
+//        g.setFont(new Font("Arial", Font.PLAIN, 18));
+//        if (gameOver) 
+//        {
+//            g.drawString("Game Over: " + String.valueOf(score), tileSize/2, tileSize/2);
+//        }
+//        else
+//        {
+//            g.drawString("X" + String.valueOf(lives)+ " Score: " + String.valueOf(score) , tileSize/2, tileSize/2);
+//        }
+          g.setFont(new Font("Arial", Font.PLAIN, 18));
+
+          String scoreText;
+          if (gameOver) 
+          {
+            scoreText = "Game Over: " + score;
+          }
+          else
+          {
+            scoreText = "X" + lives + " Score: " + score;
+          }
+
+          // Position
+          int x = tileSize / 2;
+          int y = tileSize / 2;
+
+          // Draw background box (optional)
+          int padding = 10;
+          FontMetrics fm = g.getFontMetrics();
+          int textWidth = fm.stringWidth(scoreText);
+          int textHeight = fm.getHeight();
+
+          g.setColor(Color.WHITE); // text color
+          g.drawString(scoreText, x, y + fm.getAscent());
+
+          // Draw rectangle border
+          g.setColor(Color.YELLOW); // border color
+          g.drawRect(x - padding / 2, y - padding / 2, textWidth + padding, textHeight + padding / 2);
+
     }
     
     public void move()
